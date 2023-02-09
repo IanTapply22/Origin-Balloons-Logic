@@ -14,6 +14,6 @@ $ javac -cp "path\to\processing\core.jar" Main.java
 
 # TODO/Planned
 - Option restriction for degrees of freedom for each segment.
-- More configurations for segments.
+- ~~More configurations for segments.~~
 - Debug options.
-- Indications for indexes. (last & first segmets)
+- ~~Indications for indexes. (last & first segments)~~

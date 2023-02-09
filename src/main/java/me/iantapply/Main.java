@@ -1,16 +1,22 @@
 package me.iantapply;
 
+import me.iantapply.segments.Segment;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
-    Segment tentacle;
+    private Segment tentacle;
 
     /**
      * Segment properties
      */
-    static Integer numberOfSegments = 5;
-    Integer segmentLength = 40;
+    public static int numberOfSegments = 5;
+    int segmentLength = 40;
+    public static boolean indicateStartEnd = true;
 
+    // Color settings
+    public static int leadingColor = 0xFF00FF00;
+    public static int endColor = 0xFFFF0000;
+    public static int neutralColor = 0xFFFFFFFF;
 
     public static void main(String[] args) {
         PApplet.main("me.iantapply.Main");
@@ -22,6 +28,9 @@ public class Main extends PApplet {
     }
 
     public void setup() {
+        // Window title
+        surface.setTitle("Inverse Kinematics");
+
         // Leading segment following mouse (player)
         Segment current = new Segment(0, 0, segmentLength, 0, g);
 
@@ -31,7 +40,6 @@ public class Main extends PApplet {
             Segment next = new Segment(current, segmentLength, i, g);
             current.child = next;
             current = next;
-
         }
         tentacle = current;
     }
@@ -51,6 +59,7 @@ public class Main extends PApplet {
             next.follow();
             next.update();
             next.show();
+
             next = next.parent;
         }
     }
