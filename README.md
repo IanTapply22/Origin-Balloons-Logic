@@ -1,4 +1,4 @@
-# Inverse Kinematics - Multi-Part Balloons
+# Origin Balloons Logic - Multi-Part Balloons
 
 **Description:** An example Java project that demonstrates the usage of inverse kinematics and splines, specifically implementing logic for Origin Realms balloons using the Processing library.
 
