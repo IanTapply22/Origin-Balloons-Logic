@@ -88,19 +88,17 @@ public class Segment {
         if (this.child != null){
             double child_angle = child.heading();
 
-            double a = angle;
-            double b = child_angle;
-            double d = Math.abs(a - b);
+            double difference = Math.abs(angle - child_angle);
 
-            if (d > Math.PI) {
-                d = 2 * Math.PI - d;
+            if (difference > Math.PI) {
+                difference = 2 * Math.PI - difference;
             }
 
-            int sign = (a - b >= 0 && a - b <= Math.toRadians(180)) || (a - b <= Math.toRadians(-180) && a - b >= Math.toRadians(-360)) ? 1 : -1;
+            int sign = (angle - child_angle >= 0 && angle - child_angle <= Math.toRadians(180)) || (angle - child_angle <= Math.toRadians(-180) && angle - child_angle >= Math.toRadians(-360)) ? 1 : -1;
 
             double max_angle = Math.toRadians(35);
-            if (d > max_angle){
-                angle = (child_angle + (max_angle * sign) + (Math.PI * 2.0)) % (Math.PI * 2.0);
+            if (difference > max_angle){
+                angle = (child_angle + (max_angle * sign)) % (Math.PI * 2.0);
             }
         }
         float dx = length * cos((float)angle);
