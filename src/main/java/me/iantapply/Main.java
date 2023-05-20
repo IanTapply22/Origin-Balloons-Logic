@@ -9,7 +9,7 @@ public class Main extends PApplet {
     /**
      * Segment properties
      */
-    public static int numberOfSegments = 5;
+    public static int numberOfSegments = 10;
     int segmentLength = 40;
     public static boolean indicateStartEnd = true;
 
@@ -32,7 +32,7 @@ public class Main extends PApplet {
         surface.setTitle("Inverse Kinematics");
 
         // Leading segment following mouse (player)
-        Segment current = new Segment(0, 0, segmentLength, 0, g);
+        Segment current = new Segment(0, 200, segmentLength, 0, g);
 
         // Start index at 1 to account for leading segment
         // Creates a new segment that follows each other

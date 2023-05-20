@@ -15,11 +15,8 @@ public class Segment {
     SegmentVector pointB = new SegmentVector();
 
     @Getter
-    float angle = 0;
-    @Getter
     float length;
 
-    // Parent and child of segment
     public Segment parent = null;
     public Segment child = null;
 
@@ -43,7 +40,10 @@ public class Segment {
         this.index = i;
         this.pg = pg;
 
-        this.calculatePointB();
+        float angle = 0;
+        float dx = length * cos(angle);
+        float dy = length * sin(angle);
+        this.pointB.set(this.pointA.x + dx, this.pointA.y + dy);
     }
 
     /**
@@ -60,15 +60,18 @@ public class Segment {
         this.index = i;
         this.pg = pg;
 
-        this.calculatePointB();
+        float angle = 0;
+        float dx = length * cos(angle);
+        float dy = length * sin(angle);
+        this.pointB.set(this.pointA.x + dx, this.pointA.y + dy);
     }
 
     /**
      * Follows to the child's point A location.
      */
     public void follow() {
-        float targetX = this.child.pointA.x;
-        float targetY = this.child.pointA.y;
+        float targetX = this.child.pointB.x;
+        float targetY = this.child.pointB.y;
         follow(targetX, targetY);
     }
 
@@ -79,28 +82,43 @@ public class Segment {
      */
     public void follow(float targetX, float targetY) {
         SegmentVector target = new SegmentVector(targetX, targetY);
-        SegmentVector dir = SegmentVector.subtract(target, pointA);
-        angle = dir.heading();
-        dir.setMagnitude(length);
-        dir.multiply(-1);
-        pointA = SegmentVector.add(target, dir);
+        SegmentVector dir = SegmentVector.subtract(target, pointB);
+
+        double angle = dir.heading();
+        if (this.child != null){
+            double child_angle = child.heading();
+
+            double a = angle;
+            double b = child_angle;
+            double d = Math.abs(a - b) % Math.toRadians(360);
+
+            int sign = (a - b >= 0 && a - b <= Math.toRadians(180)) || (a - b <=Math.toRadians(-180) && a- b>= Math.toRadians(-360)) ? 1 : -1;
+
+            double max_angle = Math.toRadians(35);
+            if (d > max_angle){
+                angle = (child_angle + (max_angle * sign)) % (Math.PI * 2.0);
+            }
+        }
+        float dx = length * cos((float)angle);
+        float dy = length * sin((float)angle);
+
+        pointA = target;
+        this.pointB.set(this.pointA.x - dx, this.pointA.y - dy);
+
+//        pointB = SegmentVector.add(pointA, dir);
+//        System.out.println("wanted: " + angle + " got: " + this.heading());
     }
 
-
-    /**
-     * Calculates and sets position of point B.
-     */
-    public void calculatePointB() {
-        float dx = length * cos(this.angle);
-        float dy = length * sin(this.angle);
-        this.pointB.set(this.pointA.x + dx, this.pointA.y + dy);
+    public float heading(){
+        return SegmentVector.subtract(pointA, pointB).heading();
     }
+
 
     /**
      * Updates position of point b (closest to cursor).
      */
     public void update() {
-        this.calculatePointB();
+//        this.calculatePointB();
     }
 
     /**
@@ -123,6 +141,7 @@ public class Segment {
         }
         // Width (redundant)
         pg.strokeWeight(3);
+//        pg.point(this.pointB.x, this.pointB.y);
         pg.line(this.pointA.x, this.pointA.y, this.pointB.x, this.pointB.y);
     }
 }
