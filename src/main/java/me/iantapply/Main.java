@@ -4,7 +4,7 @@ import me.iantapply.segments.Segment;
 import processing.core.PApplet;
 
 public class Main extends PApplet {
-    private Segment tentacle;
+    private Segment tentacle; // Current segment
 
     /**
      * Segment properties
@@ -13,10 +13,9 @@ public class Main extends PApplet {
     int segmentLength = 40;
     public static boolean indicateStartEnd = true;
 
-    // Color settings
-    public static int leadingColor = 0xFF00FF00;
-    public static int endColor = 0xFFFF0000;
-    public static int neutralColor = 0xFFFFFFFF;
+    public static int leadingSegmentColour = 0xFF00FF00;
+    public static int endSegmentColour = 0xFFFF0000;
+    public static int neutralSegmentColour = 0xFFFFFFFF;
 
     public static void main(String[] args) {
         PApplet.main("me.iantapply.Main");
@@ -24,7 +23,7 @@ public class Main extends PApplet {
 
     public void settings() {
         // Size of window
-        size(1200, 800);
+        size(1800, 1000);
     }
 
     public void setup() {
@@ -50,14 +49,12 @@ public class Main extends PApplet {
 
         // Follow, update, and show the leading segment
         tentacle.follow(mouseX, mouseY);
-        tentacle.update();
         tentacle.show();
 
         // Make the other segments follow
         Segment next = tentacle.parent;
         while (next != null) {
             next.follow();
-            next.update();
             next.show();
 
             next = next.parent;

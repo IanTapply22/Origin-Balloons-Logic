@@ -76,14 +76,6 @@ public class SegmentVector implements Serializable {
     }
 
     /**
-     * Gets magnitude of a vector.
-     * @return The magnitude of a vector's axis.
-     */
-    public float magnitude() {
-        return (float) Math.sqrt(x*x + y*y + z*z);
-    }
-
-    /**
      * Creates a new segment vector derived from 2 segment vectors added together.
      * @param v1 Segment vector 1.
      * @param v2 Segment vector 2.
@@ -133,45 +125,6 @@ public class SegmentVector implements Serializable {
             target.set(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
         }
         return target;
-    }
-
-    /**
-     * Multiplies a vectors axis by a specified float.
-     * @param n Number to multiply by.
-     */
-    public void multiply(float n) {
-        x *= n;
-        y *= n;
-        z *= n;
-    }
-
-    /**
-     * Divides a vectors axis by a specified float.
-     * @param n Number to divide by.
-     */
-    public void divide(float n) {
-        x /= n;
-        y /= n;
-        z /= n;
-    }
-
-    /**
-     * Normalizes a vector's axis.
-     */
-    public void normalize() {
-        float m = magnitude();
-        if (m != 0 && m != 1) {
-            divide(m);
-        }
-    }
-
-    /**
-     * Sets the magnitude of a vector.
-     * @param len Length of segment.
-     */
-    public void setMagnitude(float len) {
-        normalize();
-        multiply(len);
     }
 
     /**
