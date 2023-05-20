@@ -1,19 +1,61 @@
-# Inverse-Kinematics
-An implementation of inverse kinematics in a 2d space.
+# Inverse Kinematics - Multi-Part Balloons
 
-# Project Prerequisites
-This project requires that [Java 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) and [the latest processing](https://processing.org/download) be downloaded to run the project.
+**Description:** An example Java project that demonstrates the usage of inverse kinematics and splines, specifically implementing logic for Origin Realms balloons using the Processing library.
 
-# Running/Compiling
-Either [create an intellij run/debug configuration](https://www.jetbrains.com/help/idea/run-debug-configuration.html) or run the following command in your project with the latest [processing](https://processing.org/download)
-downloaded.<br>
+## Table of Contents
 
-``` shell
-$ javac -cp "path\to\processing\core.jar" Main.java
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Dependencies](#dependencies)
+
+## Installation
+
+To run this project, ensure that you have Java and Maven installed on your system. Then, follow these steps:
+
+1. Clone the repository to your local machine.
+```shell
+git clone https://github.com/IanTapply22/Inverse-Kinematics.git
 ```
 
-# TODO/Planned
-- Option restriction for degrees of freedom for each segment.
-- ~~More configurations for segments.~~
-- Debug options.
-- ~~Indications for indexes. (last & first segments)~~
+2. Navigate to the project directory.
+```shell
+cd Inverse-Kinematics
+```
+
+3. Build the project using Maven.
+```shell
+mvn clean package
+```
+
+## Usage
+
+1. Once the project is built, execute the JAR file.
+```shell
+java -jar target/inverse-kinematics.jar
+```
+
+2. The application will launch, displaying the Origin Realms balloons simulation.
+
+## Features
+
+This Java project showcases the following features:
+
+- Inverse kinematics: The "snakes" (soon to be balloon nodes) movements are calculated using inverse kinematics algorithms, allowing them to react realistically to mouse movement.
+- Splines: The project implements splines to create smooth and natural-looking movement.
+- Origin Realms balloons logic: The application demonstrates the logic specific to Origin Realms multi-part balloons, providing insights into their behavior and physics.
+
+## Dependencies
+
+This project utilizes the following dependencies:
+
+- Java: [Version 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- Maven: [Version 3.9.2](https://maven.apache.org/download.cgi)
+- Processing library: [Version 3.5.4](https://github.com/processing/processing)
+- Lombok: [Version 1.18.26](https://projectlombok.org/)
+
+Make sure to have these dependencies installed via the pom.xml before building and running the project.
+
+## Contributors
+
+[Parker TenBroeck](https://github.com/ParkerTenBroeck) - Helped with implementing the math for restricting degrees of freedom for joints.
