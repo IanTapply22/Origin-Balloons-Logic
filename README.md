@@ -15,12 +15,12 @@ To run this project, ensure that you have Java and Maven installed on your syste
 
 1. Clone the repository to your local machine.
 ```shell
-git clone https://github.com/IanTapply22/Inverse-Kinematics.git
+git clone https://github.com/IanTapply22/Origin-Balloons-Logic.git
 ```
 
 2. Navigate to the project directory.
 ```shell
-cd Inverse-Kinematics
+cd Origin-Balloons-Logic
 ```
 
 3. Build the project using Maven.
@@ -30,9 +30,9 @@ mvn clean package
 
 ## Usage
 
-1. Once the project is built, execute the JAR file.
+1. Once the project is built, run the main class OR execute the JAR file using the following command.
 ```shell
-java -jar target/inverse-kinematics.jar
+java -jar target/Origin-Balloons-Logic.jar
 ```
 
 2. The application will launch, displaying the Origin Realms balloons simulation.
