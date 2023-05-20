@@ -90,13 +90,17 @@ public class Segment {
 
             double a = angle;
             double b = child_angle;
-            double d = Math.abs(a - b) % Math.toRadians(360);
+            double d = Math.abs(a - b);
 
-            int sign = (a - b >= 0 && a - b <= Math.toRadians(180)) || (a - b <=Math.toRadians(-180) && a- b>= Math.toRadians(-360)) ? 1 : -1;
+            if (d > Math.PI) {
+                d = 2 * Math.PI - d;
+            }
+
+            int sign = (a - b >= 0 && a - b <= Math.toRadians(180)) || (a - b <= Math.toRadians(-180) && a - b >= Math.toRadians(-360)) ? 1 : -1;
 
             double max_angle = Math.toRadians(35);
             if (d > max_angle){
-                angle = (child_angle + (max_angle * sign)) % (Math.PI * 2.0);
+                angle = (child_angle + (max_angle * sign) + (Math.PI * 2.0)) % (Math.PI * 2.0);
             }
         }
         float dx = length * cos((float)angle);
@@ -105,9 +109,10 @@ public class Segment {
         pointA = target;
         this.pointB.set(this.pointA.x - dx, this.pointA.y - dy);
 
-//        pointB = SegmentVector.add(pointA, dir);
-//        System.out.println("wanted: " + angle + " got: " + this.heading());
+        // pointB = SegmentVector.add(pointA, dir);
+        // System.out.println("wanted: " + angle + " got: " + this.heading());
     }
+
 
     public float heading(){
         return SegmentVector.subtract(pointA, pointB).heading();
@@ -141,7 +146,7 @@ public class Segment {
         }
         // Width (redundant)
         pg.strokeWeight(3);
-//        pg.point(this.pointB.x, this.pointB.y);
+        //pg.point(this.pointB.x, this.pointB.y);
         pg.line(this.pointA.x, this.pointA.y, this.pointB.x, this.pointB.y);
     }
 }
